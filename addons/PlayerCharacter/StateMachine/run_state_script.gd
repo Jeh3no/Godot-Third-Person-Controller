@@ -4,74 +4,71 @@ class_name RunState
 
 var state_name : String = "Run"
 
-var cR : CharacterBody3D
+var play_char : CharacterBody3D
 
-func enter(char_ref : CharacterBody3D):
-	cR = char_ref
+func enter(play_char_ref : CharacterBody3D) -> void:
+	play_char = play_char_ref
 	
 	verifications()
 	
-func verifications():
-	cR.godot_plush_skin.set_state("run")
-	cR.move_speed = cR.run_speed
-	cR.move_accel = cR.run_accel
-	cR.move_deccel = cR.run_deccel
+func verifications() -> void:
+	play_char.godot_plush_skin.set_state("run")
+	play_char.move_speed = play_char.run_speed
+	play_char.move_accel = play_char.run_accel
+	play_char.move_deccel = play_char.run_deccel
 	
-	cR.floor_snap_length = 1.0
-	if cR.jump_cooldown > 0.0: cR.jump_cooldown = -1.0
-	if cR.nb_jumps_in_air_allowed < cR.nb_jumps_in_air_allowed_ref: cR.nb_jumps_in_air_allowed = cR.nb_jumps_in_air_allowed_ref
-	if cR.coyote_jump_cooldown < cR.coyote_jump_cooldown_ref: cR.coyote_jump_cooldown = cR.coyote_jump_cooldown_ref
-	if cR.has_cut_jump: cR.has_cut_jump = false
-	if !cR.movement_dust.emitting: cR.movement_dust.emitting = true
+	play_char.floor_snap_length = 1.0
+	if play_char.jump_cooldown > 0.0: play_char.jump_cooldown = -1.0
+	if play_char.nb_jumps_in_air_allowed < play_char.nb_jumps_in_air_allowed_ref: play_char.nb_jumps_in_air_allowed = play_char.nb_jumps_in_air_allowed_ref
+	if play_char.coyote_jump_cooldown < play_char.coyote_jump_cooldown_ref: play_char.coyote_jump_cooldown = play_char.coyote_jump_cooldown_ref
+	if play_char.has_cut_jump: play_char.has_cut_jump = false
+	if !play_char.movement_dust.emitting: play_char.movement_dust.emitting = true
 	
-func update(_delta : float):
-	pass
+func physics_update(delta : float) -> void:
+	applies()
 	
-func physics_update(delta : float):
-	check_if_floor()
-	
-	cR.gravity_apply(delta)
+	play_char.gravity_apply(delta)
 	
 	input_management()
 	
 	move(delta)
 	
-func check_if_floor():
-	if !cR.is_on_floor():
-		if cR.velocity.y < 0.0:
+func applies() -> void:
+	if !play_char.is_on_floor():
+		if play_char.velocity.y < 0.0:
 			transitioned.emit(self, "InairState")
 			
-	if cR.is_on_floor():
-		if cR.jump_buff_on:
-			cR.buffered_jump = true
-			cR.jump_buff_on = false
+	if play_char.is_on_floor():
+		if play_char.jump_buff_on:
+			play_char.buffered_jump = true
+			play_char.jump_buff_on = false
 			transitioned.emit(self, "JumpState")
 			
-func input_management():
-	if Input.is_action_pressed(cR.jumpAction) if cR.auto_jump else Input.is_action_just_pressed(cR.jumpAction) :
+func input_management() -> void:
+	if Input.is_action_pressed(play_char.jump_action) if play_char.auto_jump else Input.is_action_just_pressed(play_char.jump_action):
 		transitioned.emit(self, "JumpState")
 		
-	if cR.continious_run:
+	if play_char.continious_run:
 		#has to press run button once to run
-		if Input.is_action_just_pressed(cR.runAction):
-			cR.walk_or_run = "WalkState"
+		if Input.is_action_just_pressed(play_char.run_action):
+			play_char.walk_or_run = "WalkState"
 			transitioned.emit(self, "WalkState")
 	else:
 		#has to continuously press run button to run
-		if !Input.is_action_pressed(cR.runAction):
-			cR.walk_or_run = "WalkState"
+		if !Input.is_action_pressed(play_char.run_action):
+			play_char.walk_or_run = "WalkState"
 			transitioned.emit(self, "WalkState")
 			
-	if Input.is_action_just_pressed("ragdoll"):
-		if !cR.godot_plush_skin.ragdoll:
+	if Input.is_action_just_pressed(play_char.ragdoll_action):
+		if !play_char.godot_plush_skin.ragdoll:
 			transitioned.emit(self, "RagdollState")
 		
 		
-func move(delta : float):
-	cR.move_dir = Input.get_vector(cR.moveLeftAction, cR.moveRightAction, cR.moveForwardAction, cR.moveBackwardAction).rotated(-cR.cam_holder.global_rotation.y)
+func move(delta : float) -> void:
+	play_char.move_dir = Input.get_vector(play_char.move_left_action, play_char.move_right_action, play_char.move_forward_action, play_char.move_backward_action).rotated(-play_char.cam_holder.global_rotation.y)
 	
-	if cR.move_dir and cR.is_on_floor():
-		cR.velocity.x = lerp(cR.velocity.x, cR.move_dir.x * cR.move_speed, cR.move_accel * delta)
-		cR.velocity.z = lerp(cR.velocity.z, cR.move_dir.y * cR.move_speed, cR.move_accel * delta)
+	if play_char.move_dir and play_char.is_on_floor():
+		play_char.velocity.x = lerp(play_char.velocity.x, play_char.move_dir.x * play_char.move_speed, play_char.move_accel * delta)
+		play_char.velocity.z = lerp(play_char.velocity.z, play_char.move_dir.y * play_char.move_speed, play_char.move_accel * delta)
 	else:
 		transitioned.emit(self, "IdleState")

@@ -4,70 +4,67 @@ class_name IdleState
 
 var state_name : String = "Idle"
 
-var cR : CharacterBody3D
+var play_char : CharacterBody3D
 
-func enter(char_ref : CharacterBody3D):
+func enter(char_ref : CharacterBody3D) -> void:
 	#pass play char reference
-	cR = char_ref
+	play_char = char_ref
 	
 	verifications()
 	
-func verifications():
+func verifications() -> void:
 	#manage the appliements that need to be set at the start of the state
-	cR.godot_plush_skin.set_state("idle")
-	cR.floor_snap_length = 1.0
-	if cR.jump_cooldown > 0.0: cR.jump_cooldown = -1.0
-	if cR.nb_jumps_in_air_allowed < cR.nb_jumps_in_air_allowed_ref: cR.nb_jumps_in_air_allowed = cR.nb_jumps_in_air_allowed_ref
-	if cR.coyote_jump_cooldown < cR.coyote_jump_cooldown_ref: cR.coyote_jump_cooldown = cR.coyote_jump_cooldown_ref
-	if cR.has_cut_jump: cR.has_cut_jump = false
-	if cR.movement_dust.emitting: cR.movement_dust.emitting = false
+	play_char.godot_plush_skin.set_state("idle")
+	play_char.floor_snap_length = 1.0
+	if play_char.jump_cooldown > 0.0: play_char.jump_cooldown = -1.0
+	if play_char.nb_jumps_in_air_allowed < play_char.nb_jumps_in_air_allowed_ref: play_char.nb_jumps_in_air_allowed = play_char.nb_jumps_in_air_allowed_ref
+	if play_char.coyote_jump_cooldown < play_char.coyote_jump_cooldown_ref: play_char.coyote_jump_cooldown = play_char.coyote_jump_cooldown_ref
+	if play_char.has_cut_jump: play_char.has_cut_jump = false
+	if play_char.movement_dust.emitting: play_char.movement_dust.emitting = false
 	
-func update(_delta : float):
-	pass
+func physics_update(delta : float) -> void:
+	applies()
 	
-func physics_update(delta : float):
-	check_if_floor()
-	
-	cR.gravity_apply(delta)
+	play_char.gravity_apply(delta)
 	
 	input_management()
 	
 	move(delta)
 	
-func check_if_floor():
+func applies() -> void:
 	#manage the appliements and state transitions that needs to be sets/checked/performed
 	#every time the play char pass through one of the following : floor-inair-onwall
-	if !cR.is_on_floor() and !cR.is_on_wall():
+	if !play_char.is_on_floor() and !play_char.is_on_wall():
 		transitioned.emit(self, "InairState")
-	if cR.is_on_floor():
-		if cR.jump_buff_on: 
-			cR.buffered_jump = true
-			cR.jump_buff_on = false
+	if play_char.is_on_floor():
+		if play_char.jump_buff_on: 
+			play_char.buffered_jump = true
+			play_char.jump_buff_on = false
 			transitioned.emit(self, "JumpState")
 			
-func input_management():
+func input_management() -> void:
 	#manage the state transitions depending on the actions inputs
-	if Input.is_action_pressed(cR.jumpAction) if cR.auto_jump else Input.is_action_just_pressed(cR.jumpAction) :
+	if Input.is_action_pressed(play_char.jump_action) if play_char.auto_jump else Input.is_action_just_pressed(play_char.jump_action):
 		transitioned.emit(self, "JumpState")
 		
-	if Input.is_action_just_pressed(cR.runAction):
-		if cR.walk_or_run == "WalkState": cR.walk_or_run = "RunState"
-		elif cR.walk_or_run == "RunState": cR.walk_or_run = "WalkState"
+	if Input.is_action_just_pressed(play_char.run_action):
+		if play_char.walk_or_run == "WalkState": play_char.walk_or_run = "RunState"
+		elif play_char.walk_or_run == "RunState": play_char.walk_or_run = "WalkState"
 		
-	if Input.is_action_just_pressed("ragdoll"):
-		if !cR.godot_plush_skin.ragdoll:
+	if Input.is_action_just_pressed(play_char.ragdoll_action):
+		if !play_char.godot_plush_skin.ragdoll:
 			transitioned.emit(self, "RagdollState")
 		
-func move(delta : float):
+func move(delta : float) -> void:
 	#manage the character movement
 	
 	#get the move direction depending on the input
-	cR.move_dir = Input.get_vector(cR.moveLeftAction, cR.moveRightAction, cR.moveForwardAction, cR.moveBackwardAction).rotated(-cR.cam_holder.global_rotation.y)
+	play_char.move_dir = Input.get_vector(play_char.move_left_action, play_char.move_right_action, play_char.move_forward_action, play_char.move_backward_action).rotated(-play_char.cam_holder.global_rotation.y)
 	
-	if cR.move_dir and cR.is_on_floor():
+	if play_char.move_dir and play_char.is_on_floor():
 		#transition to corresponding state
-		transitioned.emit(self, cR.walk_or_run)
+		transitioned.emit(self, play_char.walk_or_run)
 	else:
 		#apply smooth stop 
-		cR.velocity.x = lerp(cR.velocity.x, 0.0, cR.move_deccel * delta)
-		cR.velocity.z = lerp(cR.velocity.z, 0.0, cR.move_deccel * delta)
+		play_char.velocity.x = lerp(play_char.velocity.x, 0.0, play_char.move_deccel * delta)
+		play_char.velocity.z = lerp(play_char.velocity.z, 0.0, play_char.move_deccel * delta)

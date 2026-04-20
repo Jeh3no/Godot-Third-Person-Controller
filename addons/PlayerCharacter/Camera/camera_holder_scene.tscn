@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0b71d2b1hdp6"]
+
+[ext_resource type="Script" uid="uid://c46lj0jmqn7io" path="res://addons/PlayerCharacter/Camera/camera_holder_script.gd" id="1_t4ta4"]
+
+[node name="CameraHolder" type="Node3D"]
+script = ExtResource("1_t4ta4")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+unique_name_in_owner = true
+spring_length = 8.0
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+current = true
+fov = 50.0

@@ -1,5 +1,7 @@
 extends Node
 
+class_name StateMachine
+
 @export var initial_state : State
 
 var curr_state : State
@@ -8,7 +10,7 @@ var states : Dictionary = {}
 
 @onready var char_ref : CharacterBody3D = $".."
 
-func _ready():
+func _ready() -> void:
 	#get all the state childrens
 	for child in get_children():
 		if child is State:
@@ -22,13 +24,13 @@ func _ready():
 		curr_state = initial_state
 		curr_state_name = curr_state.state_name
 		
-func _process(delta : float):
+func _process(delta : float) -> void:
 	if curr_state: curr_state.update(delta)
 	
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	if curr_state: curr_state.physics_update(delta)
 	
-func on_state_child_transition(state : State, new_state_name : String):
+func on_state_child_transition(state : State, new_state_name : String) -> void:
 	#manage the transition from one state to another
 	
 	if state != curr_state: return

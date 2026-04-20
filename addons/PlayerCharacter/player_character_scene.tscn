@@ -1,0 +1,326 @@
+[gd_scene format=3 uid="uid://bgkmxyw21pc1m"]
+
+[ext_resource type="Script" uid="uid://de2sqbhiahmo6" path="res://addons/PlayerCharacter/StateMachine/player_character_script.gd" id="1_ms4x1"]
+[ext_resource type="PackedScene" uid="uid://dmyrflud401tg" path="res://addons/PlayerCharacter/GodotPlush/godot_plush_skin.tscn" id="2_mtsks"]
+[ext_resource type="Script" uid="uid://3h8kirrnujiv" path="res://addons/PlayerCharacter/Vfx/particles_manager_script.gd" id="3_v44tt"]
+[ext_resource type="Material" uid="uid://fkuklawrv3wp" path="res://addons/PlayerCharacter/Vfx/dust_mat.tres" id="4_j7qt1"]
+[ext_resource type="AudioStream" uid="uid://b7q12qmsksbc7" path="res://addons/PlayerCharacter/Sounds/footstep_concrete_000.ogg" id="5_8ixl8"]
+[ext_resource type="AudioStream" uid="uid://c6unhc5lontfn" path="res://addons/PlayerCharacter/Sounds/footstep_concrete_001.ogg" id="6_nlp36"]
+[ext_resource type="AudioStream" uid="uid://byg4lkp3ws8kt" path="res://addons/PlayerCharacter/Sounds/footstep_concrete_002.ogg" id="7_4283i"]
+[ext_resource type="AudioStream" uid="uid://bly24bd3apvev" path="res://addons/PlayerCharacter/Sounds/jingles_SAX15.ogg" id="8_s241m"]
+[ext_resource type="PackedScene" uid="uid://c0b71d2b1hdp6" path="res://addons/PlayerCharacter/Camera/camera_holder_scene.tscn" id="9_bnids"]
+[ext_resource type="Script" uid="uid://sca7ypsol83f" path="res://addons/PlayerCharacter/StateMachine/state_machine_script.gd" id="9_pxnim"]
+[ext_resource type="Script" uid="uid://stil4xkf3tk0" path="res://addons/PlayerCharacter/StateMachine/idle_state_script.gd" id="10_wmnke"]
+[ext_resource type="Script" uid="uid://blt7dest23fk0" path="res://addons/PlayerCharacter/StateMachine/walk_state_script.gd" id="11_v44tt"]
+[ext_resource type="Script" uid="uid://5gk47o641xgt" path="res://addons/PlayerCharacter/StateMachine/run_state_script.gd" id="12_l1d2p"]
+[ext_resource type="Script" uid="uid://dvu58wf01wils" path="res://addons/PlayerCharacter/StateMachine/jump_state_script.gd" id="13_pdxi8"]
+[ext_resource type="Script" uid="uid://bh3rdvokmrar1" path="res://addons/PlayerCharacter/StateMachine/inair_state_script.gd" id="14_8rpwc"]
+[ext_resource type="LabelSettings" uid="uid://sescerp70o6b" path="res://addons/Arts/Fonts/LabelFontSettings.tres" id="17_c1i0s"]
+[ext_resource type="Script" uid="uid://d2tif6xsjkwnw" path="res://addons/PlayerCharacter/StateMachine/ragdoll_state_script.gd" id="17_pdxi8"]
+[ext_resource type="Script" uid="uid://chnbi4s1tf7pa" path="res://addons/PlayerCharacter/HUD/hud_script.gd" id="17_qmq2g"]
+[ext_resource type="Script" uid="uid://dv4p3s7ptfebh" path="res://addons/PlayerCharacter/Misc/input_management_component_script.gd" id="19_dp0tn"]
+
+[sub_resource type="Curve" id="Curve_l1d2p"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.654804, 2.56598), 0.0, 0.0, 0, 0, Vector2(1, 6.66422), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_pdxi8"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 10), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_8rpwc"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.644128, 3.04252), 0.0, 0.0, 0, 0, Vector2(1, 6.56892), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_x3fw6"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 10), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_wrw8f"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_yttci"]
+curve = SubResource("Curve_wrw8f")
+
+[sub_resource type="Curve" id="Curve_gyl8p"]
+_data = [Vector2(0, 0.2), 0.0, 0.0, 0, 0, Vector2(0.3, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_p3jn6"]
+curve = SubResource("Curve_gyl8p")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dhnoe"]
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 0.25
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0.2, 0)
+scale_curve = SubResource("CurveTexture_p3jn6")
+alpha_curve = SubResource("CurveTexture_yttci")
+anim_speed_min = 0.01
+anim_speed_max = 0.03
+anim_offset_max = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_bw4i7"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sxclc"]
+random_pitch = 1.2
+streams_count = 3
+stream_0/stream = ExtResource("5_8ixl8")
+stream_1/stream = ExtResource("6_nlp36")
+stream_2/stream = ExtResource("7_4283i")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3vpnr"]
+random_pitch = 1.2
+streams_count = 3
+stream_0/stream = ExtResource("5_8ixl8")
+stream_1/stream = ExtResource("6_nlp36")
+stream_2/stream = ExtResource("7_4283i")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fvg16"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("8_s241m")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xhngq"]
+height = 1.7036133
+
+[node name="PlayerCharacter" type="CharacterBody3D" unique_id=841616460]
+collision_layer = 2
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_ms4x1")
+coyote_jump_cooldown = 0.2
+in_air_move_speed = Array[Curve]([SubResource("Curve_l1d2p"), SubResource("Curve_pdxi8")])
+in_air_accel = Array[Curve]([SubResource("Curve_8rpwc"), SubResource("Curve_x3fw6")])
+hit_wall_cut_velocity = true
+ragdoll_on_floor_only = true
+follow_cam_pos_when_aimed = true
+
+[node name="VisualRoot" type="Node3D" parent="." unique_id=2084573549]
+unique_name_in_owner = true
+
+[node name="GodotPlushSkin" parent="VisualRoot" unique_id=781060208 instance=ExtResource("2_mtsks")]
+unique_name_in_owner = true
+
+[node name="ParticlesManager" type="Node3D" parent="VisualRoot" unique_id=1816975858]
+unique_name_in_owner = true
+visible = false
+script = ExtResource("3_v44tt")
+
+[node name="MovementDust" type="GPUParticles3D" parent="VisualRoot" unique_id=916907913]
+unique_name_in_owner = true
+material_override = ExtResource("4_j7qt1")
+cast_shadow = 0
+lifetime = 0.8
+process_material = SubResource("ParticleProcessMaterial_dhnoe")
+draw_pass_1 = SubResource("QuadMesh_bw4i7")
+
+[node name="AudioRoot" type="Node3D" parent="." unique_id=730464054]
+
+[node name="FootStepAudio" type="AudioStreamPlayer3D" parent="AudioRoot" unique_id=589238366]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_sxclc")
+max_polyphony = 3
+
+[node name="ImpactAudio" type="AudioStreamPlayer3D" parent="AudioRoot" unique_id=529088021]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_3vpnr")
+volume_db = 5.0
+max_polyphony = 3
+
+[node name="WaveAudio" type="AudioStreamPlayer3D" parent="AudioRoot" unique_id=329114109]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_fvg16")
+
+[node name="CameraHolder" parent="." unique_id=367391257 instance=ExtResource("9_bnids")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1428809059]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85180664, 0)
+shape = SubResource("CapsuleShape3D_xhngq")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1948860707 node_paths=PackedStringArray("initial_state")]
+unique_name_in_owner = true
+script = ExtResource("9_pxnim")
+initial_state = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="StateMachine" unique_id=134873332]
+script = ExtResource("10_wmnke")
+metadata/_custom_type_script = "uid://stil4xkf3tk0"
+
+[node name="WalkState" type="Node" parent="StateMachine" unique_id=258018084]
+script = ExtResource("11_v44tt")
+metadata/_custom_type_script = "uid://blt7dest23fk0"
+
+[node name="RunState" type="Node" parent="StateMachine" unique_id=1994291791]
+script = ExtResource("12_l1d2p")
+metadata/_custom_type_script = "uid://5gk47o641xgt"
+
+[node name="JumpState" type="Node" parent="StateMachine" unique_id=239511361]
+script = ExtResource("13_pdxi8")
+metadata/_custom_type_script = "uid://dvu58wf01wils"
+
+[node name="InairState" type="Node" parent="StateMachine" unique_id=1549455920]
+script = ExtResource("14_8rpwc")
+metadata/_custom_type_script = "uid://bh3rdvokmrar1"
+
+[node name="RagdollState" type="Node" parent="StateMachine" unique_id=600764456]
+script = ExtResource("17_pdxi8")
+metadata/_custom_type_script = "uid://d2tif6xsjkwnw"
+
+[node name="Raycasts" type="Node3D" parent="." unique_id=368833739]
+
+[node name="FloorRaycast" type="RayCast3D" parent="Raycasts" unique_id=1653520062]
+unique_name_in_owner = true
+target_position = Vector3(0, -2, 0)
+collision_mask = 2
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=812157866 node_paths=PackedStringArray("play_char")]
+unique_name_in_owner = true
+script = ExtResource("17_qmq2g")
+play_char = NodePath("..")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD" unique_id=571861952]
+offset_left = 8.0
+offset_top = 5.0
+offset_right = 312.0
+offset_bottom = 171.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/HBoxContainer" unique_id=1475280178]
+layout_mode = 2
+
+[node name="CurrentStateLabel" type="Label" parent="HUD/HBoxContainer/VBoxContainer" unique_id=392786621]
+layout_mode = 2
+text = "Current state :"
+label_settings = ExtResource("17_c1i0s")
+
+[node name="VelocityLabel" type="Label" parent="HUD/HBoxContainer/VBoxContainer" unique_id=1719742038]
+layout_mode = 2
+text = "Velocity :"
+label_settings = ExtResource("17_c1i0s")
+
+[node name="VelocityVectorLabel" type="Label" parent="HUD/HBoxContainer/VBoxContainer" unique_id=353823937]
+layout_mode = 2
+text = "Velocity vector :"
+label_settings = ExtResource("17_c1i0s")
+
+[node name="IsOnfloorLabel" type="Label" parent="HUD/HBoxContainer/VBoxContainer" unique_id=1339182359]
+layout_mode = 2
+text = "Is on floor :"
+label_settings = ExtResource("17_c1i0s")
+
+[node name="NbJumpsInAirAllowedLabel" type="Label" parent="HUD/HBoxContainer/VBoxContainer" unique_id=1804982853]
+layout_mode = 2
+text = "Nb jumps in air allowed :"
+label_settings = ExtResource("17_c1i0s")
+
+[node name="JumpBufferLabel" type="Label" parent="HUD/HBoxContainer/VBoxContainer" unique_id=473723801]
+layout_mode = 2
+text = "Jump buffer :"
+label_settings = ExtResource("17_c1i0s")
+
+[node name="CoyoteTimeLabel" type="Label" parent="HUD/HBoxContainer/VBoxContainer" unique_id=188644483]
+layout_mode = 2
+text = "Coyote time :"
+label_settings = ExtResource("17_c1i0s")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HUD/HBoxContainer" unique_id=62228263]
+layout_mode = 2
+
+[node name="CurrentStateLabelText" type="Label" parent="HUD/HBoxContainer/VBoxContainer2" unique_id=1626926098]
+unique_name_in_owner = true
+layout_mode = 2
+text = "....."
+label_settings = ExtResource("17_c1i0s")
+
+[node name="VelocityLabelText" type="Label" parent="HUD/HBoxContainer/VBoxContainer2" unique_id=2046744291]
+unique_name_in_owner = true
+layout_mode = 2
+text = "....."
+label_settings = ExtResource("17_c1i0s")
+
+[node name="VelocityVectorLabelText" type="Label" parent="HUD/HBoxContainer/VBoxContainer2" unique_id=311644628]
+unique_name_in_owner = true
+layout_mode = 2
+text = "....."
+label_settings = ExtResource("17_c1i0s")
+
+[node name="IsOnfloorLabelText" type="Label" parent="HUD/HBoxContainer/VBoxContainer2" unique_id=1053799950]
+unique_name_in_owner = true
+layout_mode = 2
+text = "....."
+label_settings = ExtResource("17_c1i0s")
+
+[node name="NbJumpsInAirAllowedLabelText" type="Label" parent="HUD/HBoxContainer/VBoxContainer2" unique_id=722801110]
+unique_name_in_owner = true
+layout_mode = 2
+text = "....."
+label_settings = ExtResource("17_c1i0s")
+
+[node name="JumpBufferLabelText" type="Label" parent="HUD/HBoxContainer/VBoxContainer2" unique_id=1595666855]
+unique_name_in_owner = true
+layout_mode = 2
+text = "....."
+label_settings = ExtResource("17_c1i0s")
+
+[node name="CoyoteTimeLabelText" type="Label" parent="HUD/HBoxContainer/VBoxContainer2" unique_id=1146531362]
+unique_name_in_owner = true
+layout_mode = 2
+text = "....."
+label_settings = ExtResource("17_c1i0s")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HUD" unique_id=1774746481]
+offset_left = 920.0
+offset_top = 7.0
+offset_right = 1251.0
+offset_bottom = 105.0
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HUD/HBoxContainer2" unique_id=148963744]
+layout_mode = 2
+
+[node name="ModelOrientationLabel" type="Label" parent="HUD/HBoxContainer2/VBoxContainer3" unique_id=2103043172]
+layout_mode = 2
+text = "Model orientation :"
+label_settings = ExtResource("17_c1i0s")
+
+[node name="CameraModeLabel" type="Label" parent="HUD/HBoxContainer2/VBoxContainer3" unique_id=746899765]
+layout_mode = 2
+text = "Camera mode :"
+label_settings = ExtResource("17_c1i0s")
+
+[node name="FramesPerSecondLabel" type="Label" parent="HUD/HBoxContainer2/VBoxContainer3" unique_id=633755515]
+layout_mode = 2
+text = "Frames per second :"
+label_settings = ExtResource("17_c1i0s")
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="HUD/HBoxContainer2" unique_id=348101423]
+layout_mode = 2
+
+[node name="ModelOrientationLabelText" type="Label" parent="HUD/HBoxContainer2/VBoxContainer4" unique_id=285078634]
+unique_name_in_owner = true
+layout_mode = 2
+text = "....."
+label_settings = ExtResource("17_c1i0s")
+
+[node name="CameraModeLabelText" type="Label" parent="HUD/HBoxContainer2/VBoxContainer4" unique_id=1362080347]
+unique_name_in_owner = true
+layout_mode = 2
+text = "....."
+label_settings = ExtResource("17_c1i0s")
+
+[node name="FramesPerSecondLabelText" type="Label" parent="HUD/HBoxContainer2/VBoxContainer4" unique_id=1541511667]
+unique_name_in_owner = true
+layout_mode = 2
+text = "....."
+label_settings = ExtResource("17_c1i0s")
+
+[node name="InputManagementComponent" type="Node" parent="." unique_id=333988112]
+script = ExtResource("19_dp0tn")
