@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dewgtcm8moxxi"
-path="res://.godot/imported/Ticketing.ttf-8780c476e4eb7c822ed9d28281dd9717.fontdata"
+path="res://.godot/imported/Ticketing.ttf-23acac4d2f78152c64ab3b5d78b35238.fontdata"
 
 [deps]
 
-source_file="res://addons/Arts/Fonts/Ticketing.ttf"
-dest_files=["res://.godot/imported/Ticketing.ttf-8780c476e4eb7c822ed9d28281dd9717.fontdata"]
+source_file="res://Godot-State-Machine-Third-Person-Controller/addons/Arts/Fonts/Ticketing.ttf"
+dest_files=["res://.godot/imported/Ticketing.ttf-23acac4d2f78152c64ab3b5d78b35238.fontdata"]
 
 [params]
 
@@ -21,6 +21,7 @@ msdf_pixel_range=8
 msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
+modulate_color_glyphs=false
 hinting=1
 subpixel_positioning=4
 keep_rounding_remainders=true

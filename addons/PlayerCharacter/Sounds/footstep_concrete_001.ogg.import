@@ -3,12 +3,12 @@
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
 uid="uid://c6unhc5lontfn"
-path="res://.godot/imported/footstep_concrete_001.ogg-a5c4f83d2d43ecc930e9873eb56eb0f6.oggvorbisstr"
+path="res://.godot/imported/footstep_concrete_001.ogg-afea322210296a25eea86954c96038e8.oggvorbisstr"
 
 [deps]
 
-source_file="res://addons/PlayerCharacter/Sounds/footstep_concrete_001.ogg"
-dest_files=["res://.godot/imported/footstep_concrete_001.ogg-a5c4f83d2d43ecc930e9873eb56eb0f6.oggvorbisstr"]
+source_file="res://Godot-State-Machine-Third-Person-Controller/addons/PlayerCharacter/Sounds/footstep_concrete_001.ogg"
+dest_files=["res://.godot/imported/footstep_concrete_001.ogg-afea322210296a25eea86954c96038e8.oggvorbisstr"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cewsqmuaxsj3k"
-path="res://.godot/imported/grid_yellow_1024x1024.png-09a4311ad82f109bcd1eb12140cd7ecb.ctex"
+path="res://.godot/imported/grid_yellow_1024x1024.png-a5f291af91ebcf8ef31fb72dd95b31b4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/Arts/godot-prototype-texture/PNG/grid_1024x1024/grid_yellow_1024x1024.png"
-dest_files=["res://.godot/imported/grid_yellow_1024x1024.png-09a4311ad82f109bcd1eb12140cd7ecb.ctex"]
+source_file="res://Godot-State-Machine-Third-Person-Controller/addons/Arts/godot-prototype-texture/PNG/grid_1024x1024/grid_yellow_1024x1024.png"
+dest_files=["res://.godot/imported/grid_yellow_1024x1024.png-a5f291af91ebcf8ef31fb72dd95b31b4.ctex"]
 
 [params]
 
