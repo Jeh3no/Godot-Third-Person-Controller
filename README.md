@@ -1,6 +1,6 @@
 A simple and complete third person controller asset, made in Godot 4.
 
-![preview.png](https://github.com/Jeh3no/Godot-State-Machine-Third-Person-Controller/blob/main/addons/Arts/Images/preview.png?raw=true)
+![preview.png](https://raw.githubusercontent.com/Jeh3no/Godot-Third-Person-Controller/refs/heads/main/addons/JehenoThirdPersonController/Arts/Images/preview.png)
 
 
 # **General**
