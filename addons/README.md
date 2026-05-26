@@ -41,7 +41,6 @@ The asset is 100% written in GDScript, with the snake case convention.
 - Jump buffering
 - Coyote time
 - Air control (customizable via curves)
-- Ragdoll
    
  **Camera**
  - Default/Free camera
@@ -74,7 +73,7 @@ Download or clone this repository and copy the `addons/` folder into your Godot 
 
 ## Step 2(optional): Set up input actions
 
-The controller requires **12 input actions** to be defined in your project's Input Map. If they are not binded, the default keybindings will be used. Go to **Project > Project Settings > Input Map** and create each of the following actions, then bind them to your preferred keys/buttons.
+The controller requires **11 input actions** to be defined in your project's Input Map. If they are not binded, the default keybindings will be used. Go to **Project > Project Settings > Input Map** and create each of the following actions, then bind them to your preferred keys/buttons.
 
 By default, the key actions are defined as "play_char_{action_name}_action". Do not change this name unless you have configured your own key bindings.
 
@@ -88,21 +87,22 @@ To change the keybinds in the scripts, i have set up one that center all the inp
 | `play_char_move_right_action` | Strafe right | D, Right |
 | `play_char_run_action` | Run / sprint | Shift |
 | `play_char_jump_action` | Jump | Space |
-| `play_char_ragdoll_action` | Ragdoll | R |
 | `play_char_mouse_mode_action` | Toggle mouse capture | Ctrl |
 | `play_char_aim_cam_action` | Camera aim  | Right mouse button |
-| `play_char_aim_cam_action` | Camera aim side  | G |
+| `play_char_aim_cam_side_action` | Camera aim side  | G |
 | `play_char_cam_zoom_in_action` | Camera zoom in | Mouse wheel up, V |
 | `play_char_cam_zoom_out_action` | Camera zoom out | Mouse wheel down, B |
 
 ## Step 3(optional): Set up collisions
 
-Collisions masks and layers are already set up in the scenes, but for more clarity you can name them in the "3D Physics" section of your Godot projet settings window.
+Collisions masks and layers are already set up in the scenes, but for more clarity you can name them in the "3D Physics" section of your Godot projet settings window, as following :
+- 1 : world
+- 2 : player_character
 
 
 # State machine overview
 
-The controller uses 6 states, each in its own script:
+The controller uses 5 states, each in its own script:
 
 | State | Description |
 |---|---|
@@ -111,7 +111,6 @@ The controller uses 6 states, each in its own script:
 | **Run** | Faster movement. Supports continuous hold or toggle mode. |
 | **Jump** | Active jump with air control. |
 | **InAir** | Airborne without jumping (e.g., walked off an edge). Manages coyote time, jump buffering, and double jumps. |
-| **Ragdoll** | Put the character in ragdoll mode. |
 
 
 # Issues and contributions

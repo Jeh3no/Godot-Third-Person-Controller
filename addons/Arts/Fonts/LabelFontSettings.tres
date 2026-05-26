@@ -1,9 +1,0 @@
-[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://sescerp70o6b"]
-
-[ext_resource type="FontFile" uid="uid://dewgtcm8moxxi" path="res://addons/Arts/Fonts/Ticketing.ttf" id="1_qtvfi"]
-
-[resource]
-font = ExtResource("1_qtvfi")
-font_size = 25
-outline_size = 5
-outline_color = Color(0, 0, 0, 1)
