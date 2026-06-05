@@ -284,6 +284,11 @@ layout_mode = 2
 text = "Camera mode :"
 label_settings = ExtResource("17_c1i0s")
 
+[node name="CameraCollisionLabel" type="Label" parent="HUD/HBoxContainer2/VBoxContainer3" unique_id=928547642]
+layout_mode = 2
+text = "Camera collision :"
+label_settings = ExtResource("17_c1i0s")
+
 [node name="FramesPerSecondLabel" type="Label" parent="HUD/HBoxContainer2/VBoxContainer3" unique_id=633755515]
 layout_mode = 2
 text = "Frames per second :"
@@ -299,6 +304,12 @@ text = "....."
 label_settings = ExtResource("17_c1i0s")
 
 [node name="CameraModeLabelText" type="Label" parent="HUD/HBoxContainer2/VBoxContainer4" unique_id=1362080347]
+unique_name_in_owner = true
+layout_mode = 2
+text = "....."
+label_settings = ExtResource("17_c1i0s")
+
+[node name="CameraCollisionLabelText" type="Label" parent="HUD/HBoxContainer2/VBoxContainer4" unique_id=1416365875]
 unique_name_in_owner = true
 layout_mode = 2
 text = "....."

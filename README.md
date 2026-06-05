@@ -73,7 +73,7 @@ Download or clone this repository and copy the `addons/` folder into your Godot 
 
 ## Step 2(optional): Set up input actions
 
-The controller requires **11 input actions** to be defined in your project's Input Map. If they are not binded, the default keybindings will be used. Go to **Project > Project Settings > Input Map** and create each of the following actions, then bind them to your preferred keys/buttons.
+The controller requires **12 input actions** to be defined in your project's Input Map. If they are not binded, the default keybindings will be used. Go to **Project > Project Settings > Input Map** and create each of the following actions, then bind them to your preferred keys/buttons.
 
 By default, the key actions are defined as "play_char_{action_name}_action". Do not change this name unless you have configured your own key bindings.
 
@@ -92,6 +92,7 @@ To change the keybinds in the scripts, i have set up one that center all the inp
 | `play_char_aim_cam_side_action` | Camera aim side  | G |
 | `play_char_cam_zoom_in_action` | Camera zoom in | Mouse wheel up, V |
 | `play_char_cam_zoom_out_action` | Camera zoom out | Mouse wheel down, B |
+| `play_char_change_cam_collision_action` | Change camera collision mode | T |
 
 ## Step 3(optional): Set up collisions
 

@@ -20,12 +20,16 @@ var cam_aimed : bool = false #if true, cam goes into "aim/shooter mode", above t
 @export var aim_cam_pos : Vector3 = Vector3(1.4, 0.9, 0.0)
 var aim_cam_pos_side : bool = true #false = left, true = right
 
+#collision variables
+var cam_collision_enabled : bool = true
+
 #keybinding variables
 var mouse_mode_action : StringName
 var aim_cam_action : StringName
 var aim_cam_side_action : StringName
 var cam_zoom_in_action : StringName
 var cam_zoom_out_action : StringName
+var change_cam_collision_action : StringName
 
 #reference variables
 @onready var spring_arm : SpringArm3D = %SpringArm3D
@@ -63,6 +67,10 @@ func _input(event) -> void:
 	if event.is_action_pressed(aim_cam_side_action):
 		aim_cam_pos_side = !aim_cam_pos_side
 		
+	if event.is_action_pressed(change_cam_collision_action):
+		cam_collision_enabled = !cam_collision_enabled
+		set_camera_collision_with_world()
+		
 	#rotate cam according to the mouse
 	if event is InputEventMouseMotion: 
 		var viewport_transform: Transform2D = get_tree().root.get_final_transform()
@@ -71,10 +79,8 @@ func _input(event) -> void:
 		
 func _process(delta) -> void:
 	#position the cam according to its mode (default, aim (with left or right side))
-	if !cam_aimed: 
-		cam.position = Vector3(0.0, 0.0, spring_arm.get_hit_length())
-	else: 
-		cam.position = Vector3(aim_cam_pos.x if aim_cam_pos_side else -aim_cam_pos.x, aim_cam_pos.y, spring_arm.get_hit_length())
+	if !cam_aimed:  cam.position = Vector3(0.0, 0.0, spring_arm.get_hit_length())
+	else:  cam.position = Vector3(aim_cam_pos.x if aim_cam_pos_side else -aim_cam_pos.x, aim_cam_pos.y, spring_arm.get_hit_length())
 	
 	#handle zoom
 	zoom_handling(delta)
@@ -91,5 +97,11 @@ func zoom_handling(delta : float) -> void:
 	#zoom in/out cam, and clamp zoom value between min and max zoom values
 	spring_arm.spring_length += Input.get_axis(cam_zoom_in_action, cam_zoom_out_action) * zoom_speed * delta
 	spring_arm.spring_length = clamp(spring_arm.spring_length, min_spring_length, max_spring_length)
+	
+func set_camera_collision_with_world() -> void:
+	if cam_collision_enabled:
+		spring_arm.set_collision_mask(1)
+	else:
+		spring_arm.set_collision_mask(0)
 	
 	

@@ -18,6 +18,7 @@ class_name InputManagementComponent
 @export var aim_cam_side_action : StringName = "play_char_aim_cam_side_action"
 @export var cam_zoom_in_action : StringName = "play_char_cam_zoom_in_action"
 @export var cam_zoom_out_action : StringName = "play_char_cam_zoom_out_action"
+@export var change_cam_collision_action : StringName = "play_char_change_cam_collision_action"
 
 @onready var input_actions_list : Array[StringName] = [
 	move_forward_action,
@@ -30,7 +31,8 @@ class_name InputManagementComponent
 	aim_cam_action,
 	aim_cam_side_action,
 	cam_zoom_in_action,
-	cam_zoom_out_action
+	cam_zoom_out_action,
+	change_cam_collision_action
 	]
 	
 @export_group("Checker variables")
@@ -59,6 +61,7 @@ func attribute_keybinds() -> void:
 	cam_holder_ref.aim_cam_side_action = aim_cam_side_action
 	cam_holder_ref.cam_zoom_in_action = cam_zoom_in_action
 	cam_holder_ref.cam_zoom_out_action = cam_zoom_out_action
+	cam_holder_ref.change_cam_collision_action = change_cam_collision_action
 	
 func build_default_keybinding() -> void:
 	#build it in runtime to ensure that export variables have been set
@@ -101,6 +104,9 @@ func build_default_keybinding() -> void:
 		cam_zoom_out_action : [
 			{ "type": "mouse", "code": MouseButton.MOUSE_BUTTON_WHEEL_DOWN },
 			{ "type": "key", "code": Key.KEY_B }
+		],
+		change_cam_collision_action : [
+			{ "type": "key", "code": Key.KEY_T }
 		]
 	}
 	
