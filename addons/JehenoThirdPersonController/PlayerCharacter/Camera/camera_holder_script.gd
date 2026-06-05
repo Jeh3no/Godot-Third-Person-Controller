@@ -70,9 +70,11 @@ func _input(event) -> void:
 		rotate_from_vector(mouse_motion * mouse_sensibility)
 		
 func _process(delta) -> void:
-	#position the cam according to her mode (default, aim (with left or right side))
-	if !cam_aimed: cam.position = Vector3(0.0, 0.0, spring_arm.spring_length)
-	else: cam.position = Vector3(aim_cam_pos.x if aim_cam_pos_side else -aim_cam_pos.x, aim_cam_pos.y, spring_arm.spring_length)
+	#position the cam according to its mode (default, aim (with left or right side))
+	if !cam_aimed: 
+		cam.position = Vector3(0.0, 0.0, spring_arm.get_hit_length())
+	else: 
+		cam.position = Vector3(aim_cam_pos.x if aim_cam_pos_side else -aim_cam_pos.x, aim_cam_pos.y, spring_arm.get_hit_length())
 	
 	#handle zoom
 	zoom_handling(delta)
