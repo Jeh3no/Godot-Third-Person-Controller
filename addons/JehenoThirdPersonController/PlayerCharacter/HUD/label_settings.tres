@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://sescerp70o6b"]
+
+[ext_resource type="FontFile" uid="uid://dewgtcm8moxxi" path="res://Godot-State-Machine-Third-Person-Controller/addons/JehenoThirdPersonController/Arts/Fonts/Ticketing.ttf" id="1_s1gp1"]
+
+[resource]
+font = ExtResource("1_s1gp1")
+font_size = 12
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)

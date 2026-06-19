@@ -11,7 +11,6 @@ var ragdoll : bool = false : set = set_ragdoll
 var squash_and_stretch = 1.0 : set = set_squash_and_stretch
 
 signal footstep(intensity : float)
-signal waved
 
 func _ready():
 	set_ragdoll(ragdoll)
