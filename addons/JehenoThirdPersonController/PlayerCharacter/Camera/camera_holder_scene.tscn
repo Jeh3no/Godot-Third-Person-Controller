@@ -12,5 +12,6 @@ spring_length = 8.0
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D" unique_id=407250716]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+cull_mask = 1
 current = true
 fov = 50.0
