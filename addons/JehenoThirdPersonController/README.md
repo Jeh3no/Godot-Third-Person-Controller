@@ -1,6 +1,6 @@
 A simple and complete third person controller asset, made in Godot 4.
 
-![preview.png](https://raw.githubusercontent.com/Jeh3no/Godot-Third-Person-Controller/refs/heads/main/addons/JehenoThirdPersonController/Arts/Images/preview.png)
+![preview.png](https://raw.githubusercontent.com/Jeh3no/Godot-Third-Person-Controller/refs/heads/main/addons/JehenoThirdPersonController/Arts/StoreImages/preview.png)
 
 
 # **General**
@@ -25,7 +25,7 @@ The asset is 100% written in GDScript, with the snake case convention.
 
 # Compatibility
 
-- **Godot 4.6, 4.5, 4.4**: Fully supported.
+- **Godot 4.6 - 4.7**: Fully supported.
 - **Godot 4.0 - 4.3**: Should work, but you will need to delete the `.uid` files.
 
 
