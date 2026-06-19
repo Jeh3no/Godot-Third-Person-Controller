@@ -25,7 +25,7 @@ The asset is 100% written in GDScript, with the snake case convention.
 
 # Compatibility
 
-- **Godot 4.6 - 4.7**: Fully supported.
+- **Godot 4.4 - 4.7**: Fully supported.
 - **Godot 4.0 - 4.3**: Should work, but you will need to delete the `.uid` files.
 
 
