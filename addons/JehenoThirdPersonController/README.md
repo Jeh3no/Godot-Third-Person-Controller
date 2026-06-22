@@ -126,3 +126,8 @@ The controller uses 5 states, each in its own script:
 - Gtibo for the original project : https://github.com/gtibo/Godot-Plush-Character
 - PiCode for the Godot Theme Prototype Textures asset: https://godotengine.org/asset-library/asset/2480
 - Demo Audio: [Kenney](https://kenney.nl/assets/category:Audio?sort=update)
+
+
+# Donations
+
+If you like my assets, and want to support my work : https://ko-fi.com/jeheno
