@@ -2,15 +2,16 @@ extends State
 
 class_name IdleState
 
-var state_name : String = "Idle"
+var state_name: String = "Idle"
 
-var play_char : CharacterBody3D
+var play_char: CharacterBody3D
 
-func enter(char_ref : CharacterBody3D) -> void:
+func enter(char_ref: CharacterBody3D) -> void:
 	#pass play char reference
 	play_char = char_ref
 	
 	verifications()
+	
 	
 func verifications() -> void:
 	#manage the appliements that need to be set at the start of the state
@@ -22,7 +23,8 @@ func verifications() -> void:
 	if play_char.has_cut_jump: play_char.has_cut_jump = false
 	if play_char.movement_dust.emitting: play_char.movement_dust.emitting = false
 	
-func physics_update(delta : float) -> void:
+	
+func physics_update(delta: float) -> void:
 	applies()
 	
 	play_char.gravity_apply(delta)
@@ -30,6 +32,7 @@ func physics_update(delta : float) -> void:
 	input_management()
 	
 	move(delta)
+	
 	
 func applies() -> void:
 	#manage the appliements and state transitions that needs to be sets/checked/performed
@@ -41,6 +44,7 @@ func applies() -> void:
 			play_char.buffered_jump = true
 			play_char.jump_buff_on = false
 			transitioned.emit(self, "JumpState")
+		
 			
 func input_management() -> void:
 	#manage the state transitions depending on the actions inputs
@@ -51,7 +55,8 @@ func input_management() -> void:
 		if play_char.walk_or_run == "WalkState": play_char.walk_or_run = "RunState"
 		elif play_char.walk_or_run == "RunState": play_char.walk_or_run = "WalkState"
 		
-func move(delta : float) -> void:
+		
+func move(delta: float) -> void:
 	#manage the character movement
 	
 	#get the move direction depending on the input

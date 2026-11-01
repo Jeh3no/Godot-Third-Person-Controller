@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cno2s1kwisic6"
-path="res://.godot/imported/image_2.png-ebd9d97c1b6c05282ff8e872d0245947.ctex"
+path="res://.godot/imported/image_2.png-3af382b195c5b5c4b05cb61e32da0e92.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Godot-State-Machine-Third-Person-Controller/addons/JehenoThirdPersonController/Arts/Images/image_2.png"
-dest_files=["res://.godot/imported/image_2.png-ebd9d97c1b6c05282ff8e872d0245947.ctex"]
+source_file="res://Godot-State-Machine-Third-Person-Controller/addons/JehenoThirdPersonController/Arts/StoreImages/image_2.png"
+dest_files=["res://.godot/imported/image_2.png-3af382b195c5b5c4b05cb61e32da0e92.ctex"]
 
 [params]
 

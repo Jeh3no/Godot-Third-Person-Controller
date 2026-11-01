@@ -2,21 +2,23 @@ extends State
 
 class_name InairState
 
-var state_name : String = "Inair"
+var state_name: String = "Inair"
 
-var play_char : CharacterBody3D
+var play_char: CharacterBody3D
 
-func enter(char_ref : CharacterBody3D) -> void:
+func enter(char_ref: CharacterBody3D) -> void:
 	play_char = char_ref
 	
 	verifications()
+	
 	
 func verifications() -> void:
 	play_char.godot_plush_skin.set_state("fall")
 	if play_char.floor_snap_length != 0.0:  play_char.floor_snap_length = 0.0
 	if play_char.movement_dust.emitting: play_char.movement_dust.emitting = false
 	
-func physics_update(delta : float) -> void:
+	
+func physics_update(delta: float) -> void:
 	applies(delta)
 	
 	if play_char.velocity.y > 0 and play_char.has_cut_jump: gravity_apply(delta)
@@ -26,7 +28,8 @@ func physics_update(delta : float) -> void:
 	
 	move(delta)
 	
-func applies(delta : float) -> void:
+	
+func applies(delta: float) -> void:
 	if !play_char.is_on_floor(): 
 		if play_char.jump_cooldown > 0.0: play_char.jump_cooldown -= delta
 		if play_char.coyote_jump_cooldown > 0.0: play_char.coyote_jump_cooldown -= delta
@@ -50,8 +53,9 @@ func applies(delta : float) -> void:
 			play_char.velocity.x = 0.0
 			play_char.velocity.z = 0.0
 		
-func gravity_apply(delta : float) -> void:
+func gravity_apply(delta: float) -> void:
 	if play_char.velocity.y >= 0.0: play_char.velocity.y -= play_char.jump_gravity / play_char.jump_cut_multiplier * delta
+		
 		
 func input_management() -> void:
 	if Input.is_action_just_pressed(play_char.jump_action):
@@ -63,7 +67,8 @@ func input_management() -> void:
 			transitioned.emit(self, "JumpState")
 		transitioned.emit(self, "JumpState")
 		
-func move(delta : float) -> void:
+		
+func move(delta: float) -> void:
 	play_char.move_dir = Input.get_vector(play_char.move_left_action, play_char.move_right_action, play_char.move_forward_action, play_char.move_backward_action).rotated(-play_char.cam_holder.global_rotation.y)
 		
 	if play_char.move_dir and !play_char.is_on_floor():
@@ -78,6 +83,7 @@ func move(delta : float) -> void:
 			
 		play_char.velocity.x = lerp(play_char.velocity.x, play_char.move_dir.x * in_air_move_speed_val, in_air_accel_val * delta)
 		play_char.velocity.z = lerp(play_char.velocity.z, play_char.move_dir.y * in_air_move_speed_val, in_air_accel_val * delta)
+		
 		
 func impact_audio_playing() -> void:
 	#audio played when play char touch the ground after being in air
